@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lernerpy"
+version = "0.1.0"
+description = "Simple command runner CLI application"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    {name = "Jedediah Jenkins", email = "example@email.com"},
+]
+keywords = ["cli", "command", "runner"]
+
+[project.scripts]
+lernerpy = "lernerpy.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages]
+find = {where = ["src"]}
