@@ -19,7 +19,7 @@ pip install -e ".[dev]"
 
 Run the CLI:
 ```bash
-lernerpy
+lern
 ```
 
 Or directly with Python:

@@ -14,7 +14,7 @@ authors = [
 keywords = ["cli", "command", "runner"]
 
 [project.scripts]
-lernerpy = "lernerpy.cli:main"
+lern = "lernerpy.cli:main"
 
 [project.optional-dependencies]
 dev = ["pytest"]

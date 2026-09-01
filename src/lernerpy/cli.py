@@ -7,7 +7,7 @@ import sys
 def main():
     """Main function to exectute the command passed as arguments."""
     if len(sys.argv) < 2:
-        print("Usage: lernerpy <command>")
+        print("Usage: lern <command>")
         sys.exit(1)
 
     cmd = sys.argv[1]
