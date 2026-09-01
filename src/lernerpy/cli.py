@@ -1,21 +1,27 @@
 #!/usr/bin/env python3
-"""Simple command-line script that accepts input and executes it as a command."""
+"""Command-line entry point for lernerpy."""
 
-from lernerpy.commands.files import main as files
 import sys
 
-def main():
-    """Main function to exectute the command passed as arguments."""
-    if len(sys.argv) < 2:
-        print("Usage: lern <command>")
-        sys.exit(1)
+from lernerpy.commands.files import main as files_main
 
-    cmd = sys.argv[1]
+def main(argv=None):
+    """Dispatch to the appropriate subcommand."""
+    args = sys.argv[1:] if argv is None else argv
 
-    if cmd == "files":
-        files(sys.argv[2:])
-    else:
-        print(f"Unknown command: {cmd}")
+    if not args:
+        print("Usage: lerner <command> [options]")
+        return 1
+
+    command = args[0]
+
+    if command == "files":
+        return files_main(args[1:])
+
+    print(f"Unknown command: {command}")
+    print("Available commands: files")
+    return 1
+
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
