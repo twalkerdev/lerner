@@ -32,5 +32,13 @@ created_at: str (timestamp)
 completed_at: str or empty (timestamp)
 """
 
+"""
+optional features:
+- priority filtering
+- due date filtering
+- search by title or description
+- show "open tasks only" by default
+"""
+
 if __name__ == "__main__":
     raise SystemExit(main())
