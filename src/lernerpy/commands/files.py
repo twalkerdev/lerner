@@ -1,4 +1,4 @@
-"""File-management commands for lernerpy."""
+"""File-management commands for lern."""
 
 import argparse
 import shutil
@@ -46,7 +46,7 @@ def remove_path(path):
 def main(argv=None):
     """Parse and execute file-management commands."""
     parser = argparse.ArgumentParser(
-        prog="lernerpy files",
+        prog="lern files",
         description="List, create, and remove files.",
     )
     parser.add_argument("path", nargs="?", default=".", help="Path to operate on")

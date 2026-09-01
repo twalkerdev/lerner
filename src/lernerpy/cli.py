@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Command-line entry point for lernerpy."""
+"""Command-line entry point for lern."""
 
 import sys
 
@@ -10,7 +10,7 @@ def main(argv=None):
     args = sys.argv[1:] if argv is None else argv
 
     if not args:
-        print("Usage: lerner <command> [options]")
+        print("Usage: lern <command> [options]")
         return 1
 
     command = args[0]
