@@ -1,10 +1,63 @@
 import argparse
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+
+DATA_DIR = Path(".lernerpy")
+DATA_FILE = DATA_DIR / "tasks.json"
+
+
+def ensure_data_dir():
+    """Ensure the data directory exists."""
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def load_tasks():
+    """Load tasks from the JSON file."""
+    if not DATA_FILE.exists():
+        return []
+    with open(DATA_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_tasks(tasks):
+    """Save tasks to the JSON file."""
+    ensure_data_dir()
+    with open(DATA_FILE, "w", encoding="utf-8") as f:
+        json.dump(tasks, f, indent=4)
 
 
 def add_task(title, description="", priority="medium", due_date=None):
     """Add a new task to the task list."""
     # Placeholder for adding a task to a data store
-    print(f"Task: '{title}' added")
+    tasks = load_tasks()
+    task = {
+        "title": title,
+        "description": description,
+        "priority": priority,
+        "due_date": due_date,
+        "status": "open",
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "completed_at": None,
+    }
+
+    tasks.append(task)
+    save_tasks(tasks)
+    print(f"Task: '{title}' added with added")
+
+
+"""
+# list tasks
+lern tasks list
+# mark task done
+lern tasks done 1
+# delete task
+lern tasks delete 1
+# filter by status or priority
+lern tasks list --status open
+lern tasks list --priority high
+# save/load tasks from disk 
+"""
 
 
 def main(argv=None):
@@ -38,31 +91,6 @@ def main(argv=None):
     parser.error(f"Unknown command: {args.command}")
     return 1
 
-
-"""
-# list tasks
-lern tasks list
-# mark task done
-lern tasks done 1
-# delete task
-lern tasks delete 1
-# filter by status or priority
-lern tasks list --status open
-lern tasks list --priority high
-# save/load tasks from disk 
-"""
-
-"""
-data model object
-id: int
-title: str
-description: str or empty
-status: str (open, done)
-priority: str (low, medium, high)
-due_date: str or empty
-created_at: str (timestamp)
-completed_at: str or empty (timestamp)
-"""
 
 """
 optional features:
