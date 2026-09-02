@@ -1,55 +1,88 @@
 # LernerPy
 
-A lightweight Python CLI application that accepts user input and executes it as shell commands.
+A lightweight Python CLI application with file-management and task-management commands.
 
 ## Installation
 
-### Create a virtual environment:
+This project uses [uv](https://docs.astral.sh/uv/) to manage its environment and dependencies.
+
+Install uv by following the [official installation instructions](https://docs.astral.sh/uv/getting-started/installation/), then sync the project:
+
 ```bash
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+uv sync
 ```
 
-### Install the package in development mode:
-```bash
-pip install -e ".[dev]"
-```
+This creates the project environment in `.venv` and installs the development dependencies.
 
 ## Usage
 
-Run the CLI:
+Run the CLI with uv:
 ```bash
-lern
+uv run lern
 ```
 
 Or directly with Python:
 ```bash
-python -m lernerpy.cli
+uv run python -m lernerpy.cli
 ```
 
-Then type commands at the prompt:
+### File commands
+
+List the contents of a directory:
+
+```bash
+uv run lern files --list .
 ```
-$ ls
-$ echo "hello"
-$ date
-$ exit  # or quit
+
+### Task commands
+
+Add a task:
+
+```bash
+uv run lern tasks add --title "Write tests" --priority high
 ```
+
+Tasks are stored in `.lernerpy/tasks.json`. The `.lernerpy` directory is created automatically when the first task is saved.
 
 ## Development
 
-### Run tests:
+### Run tests
+
+Run the complete test suite:
+
 ```bash
-pip install pytest
-pytest
+uv run pytest
 ```
+
+Run a specific test file:
+
+```bash
+uv run pytest tests/test_tasks.py
+```
+
+Run one test function:
+
+```bash
+uv run pytest tests/test_tasks.py::test_tasks_add_command_creates_task
+```
+
+Watch for changes and rerun tests automatically:
+
+```bash
+uv run poe test
+```
+
+Stop the watcher with `Ctrl+C`.
 
 ### Project Structure
 ```
 lernerpy/
 ├── src/lernerpy/        # Main package
 │   ├── cli.py           # Entry point
-│   └── utils/           # Utility modules
+│   ├── commands/        # CLI command modules
+│   └── data/            # Packaged data files, if needed
 ├── tests/               # Test files
+├── .lernerpy/           # Runtime data, including tasks.json
 ├── pyproject.toml       # Project configuration
 ├── README.md            # Project docs
 └── LEARNING_PROJECTS.md # Optional learning notes
@@ -58,3 +91,4 @@ lernerpy/
 ## Requirements
 
 - Python 3.8+
+- uv
