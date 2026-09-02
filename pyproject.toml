@@ -12,15 +12,29 @@ authors = [
     {name = "Jedediah Jenkins", email = "example@email.com"},
 ]
 keywords = ["cli", "command", "runner"]
+dependencies = []
 
 [project.scripts]
 lern = "lernerpy.cli:main"
 
-[project.optional-dependencies]
-dev = ["pytest"]
+[dependency-groups]
+dev = [
+    "poethepoet>=0.30.0",
+    "pytest>=8.3.5",
+    "pytest-watcher>=0.4.3",
+]
 
 [tool.setuptools]
 package-dir = {"" = "src"}
 
 [tool.setuptools.packages]
 find = {where = ["src"]}
+
+[tool.pytest-watcher]
+now = false
+clear = true
+delay = 0.5
+patterns = ["*.py"]
+
+[tool.poe.tasks]
+test = "ptw ."

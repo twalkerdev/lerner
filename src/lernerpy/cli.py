@@ -1,9 +1,9 @@
-#!/usr/bin/env python3
 """Command-line entry point for lern."""
 
 import sys
 
 from lernerpy.commands.files import main as files_main
+
 
 def main(argv=None):
     """Dispatch to the appropriate subcommand."""
